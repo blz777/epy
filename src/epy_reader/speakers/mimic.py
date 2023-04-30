@@ -21,6 +21,7 @@ class SpeakerMimic(SpeakerBaseModel):
             text=True,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
+            stderr=subprocess.DEVNULL,
         )
 
         self.process = subprocess.Popen(
@@ -45,6 +46,7 @@ class SpeakerMimic(SpeakerBaseModel):
 
     def stop(self) -> None:
         self.process.terminate()
+        self.mimic3_process.terminate()
 
     def cleanup(self) -> None:
         pass
