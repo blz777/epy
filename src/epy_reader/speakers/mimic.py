@@ -33,10 +33,11 @@ class SpeakerMimic(SpeakerBaseModel):
         self.mimic3_process.stdin.write(text)
         self.mimic3_process.stdin.close()
 
-        self.wait_for_audio()
+        threading.Thread(target=self.wait_for_audio, daemon=True).start()
 
     def wait_for_audio(self):
         self.process.wait()
+        self.mimic3_process.wait()
         self.audio_done.set()
 
     def is_done(self) -> bool:
