@@ -17,7 +17,7 @@ class SpeakerMimic(SpeakerBaseModel):
         self.audio_done.clear()
 
         self.mimic3_process = subprocess.Popen(
-            [self.cmd, *self.args],
+            [self.cmd, *self.args, "--interactive"],
             text=True,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
