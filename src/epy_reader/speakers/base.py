@@ -11,6 +11,17 @@ class SpeakerBaseModel:
     def speak(self, text: str) -> None:
         raise NotImplementedError("Speaker.speak() not implemented")
 
+    def speak_paced(self, text: str, pace=0):
+        if pace == 1:
+            self.args = ["--length-scale", "0.75"]
+            self.speak(text)
+            pass
+        elif pace == 2:
+            self.args = ["--length-scale", "0.5"]
+            self.speak(text)
+        else:
+            self.speak(text)
+
     def is_done(self) -> bool:
         raise NotImplementedError("Speaker.is_done() not implemented")
 

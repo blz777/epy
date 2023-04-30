@@ -646,13 +646,16 @@ class Reader:
             board.write(reading_state.row, 1)
             s = board.getch()
 
-    def speaking(self, text):
+    def speaking(self, text, key):
         self.is_speaking = True
         self.screen.addstr(self.screen_rows - 1, 0, " Speaking! ", curses.A_REVERSE)
         self.screen.refresh()
         self.screen.timeout(1)
         try:
-            self._tts_speaker.speak(text)
+            if (key == self.keymap.TTSToggle[0]):
+                self._tts_speaker.speak_paced(text, pace=2)
+            else:
+                self._tts_speaker.speak_paced(text)
 
             while True:
                 if self._tts_speaker.is_done():
@@ -917,7 +920,7 @@ class Reader:
                                 tospeak += "\n. \n"
                             else:
                                 tospeak += i + " "
-                        k = self.speaking(tospeak)
+                        k = self.speaking(tospeak, k)
                         if (
                             totlines - reading_state.row <= rows
                             and reading_state.content_index == len(contents) - 1

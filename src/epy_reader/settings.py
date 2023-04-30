@@ -82,6 +82,8 @@ class CfgDefaultKeymaps:
     Help: str = "?"
     SwitchColor: str = "c"
     TTSToggle: str = "!"
+    TTSToggleFaster: str = "@"
+    TTSToggleFastest: str = "#"
     DoubleSpreadToggle: str = "D"
     Library: str = "R"
 
@@ -130,4 +132,6 @@ class Keymap:
     Shrink: Tuple[Key, ...]
     SwitchColor: Tuple[Key, ...]
     TTSToggle: Tuple[Key, ...]
+    TTSToggleFaster: Tuple[Key, ...]
+    TTSToggleFastest: Tuple[Key, ...]
     TableOfContents: Tuple[Key, ...]
